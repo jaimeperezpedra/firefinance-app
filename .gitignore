@@ -2,6 +2,9 @@
 
 # dependencies
 /node_modules
+/cordova2/www
+/cordova2/node_modules
+/cordova2/platforms
 /.pnp
 .pnp.js
 
