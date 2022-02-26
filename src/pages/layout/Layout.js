@@ -123,9 +123,9 @@ export const Layout = () => {
             <Link to='/categories'>
               <ListItem button>
                 <ListItemIcon>
-                  <Icon.Category />
+                  <Icon.Settings />
                 </ListItemIcon>
-                <ListItemText primary="Categories" />
+                <ListItemText primary="Config" />
               </ListItem>
             </Link>
             <Link to='/profile'>
