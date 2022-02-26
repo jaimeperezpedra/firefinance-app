@@ -1,7 +1,7 @@
 import React from 'react';
 
-export const Categories = () => {
+export const Config = () => {
   return (
-    <div>Hola</div>
+    <div>Working on this page</div>
   )
 };
