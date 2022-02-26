@@ -2,6 +2,6 @@ import React from 'react';
 
 export const Categories = () => {
   return (
-    <div>Hola</div>
+    <div>Working on this page</div>
   )
 };

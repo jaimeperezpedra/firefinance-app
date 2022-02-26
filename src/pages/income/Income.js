@@ -48,8 +48,7 @@ export const Income = () => {
   }
   return (
     <Container sx={{ mt: 4, mb: 4 }}>
-        You are running the app with {process.env.NODE_ENV}
-
+        Working on this page
       <SimpleTable  title={'Incomings'} data={listOfIncomes} columns={columns} finalRow={finalRow} />
     </Container>
   )
