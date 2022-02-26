@@ -5,6 +5,7 @@ import {
   Navigate,
   useLocation
 } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 import * as Pages from './pages' 
 import { Layout } from './pages/layout/Layout';
@@ -35,4 +36,8 @@ function RequireAuth({ children }) {
   }
 
   return children;
+}
+
+RequireAuth.propTypes = {
+  children: PropTypes.node,
 }
