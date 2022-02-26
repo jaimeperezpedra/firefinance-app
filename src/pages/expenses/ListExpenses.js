@@ -103,7 +103,7 @@ export const ListExpenses = () => {
       {error && 'Error...'}
       {data && <SimpleTable data={data.expenses} columns={columns} config={{dense: true}} />}
 
-      <CreateExpense onCreated={refetch} />
+      <CreateExpense onCreated={() => refetch()} />
       <Modal
         open={open}
         onClose={() => handleClose(false)}
