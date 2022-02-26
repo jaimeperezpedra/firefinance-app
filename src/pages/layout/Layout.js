@@ -1,10 +1,8 @@
 import React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import { CssBaseline, Drawer, Box, AppBar, Toolbar,
-  List, ListItem,ListItemIcon, ListItemText , Typography, Divider, IconButton, Badge } from '@mui/material'
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { Category as CategoryIcon, Notifications as NotificationsIcon, Euro as EuroIcon } from '@mui/icons-material/'
+  List, ListItem,ListItemIcon, ListItemText , Typography, Divider, IconButton, Badge } from '@mui/material';
+import  * as Icon  from '@mui/icons-material/'
 import { Outlet, Link } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -81,7 +79,7 @@ export const Layout = () => {
                 ...(open && { display: 'none' }),
               }}
             >
-              <MenuIcon />
+              <Icon.Menu />
             </IconButton>
             <Typography
               component="h1"
@@ -94,7 +92,7 @@ export const Layout = () => {
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
+                <Icon.Notifications />
               </Badge>
             </IconButton>
           </Toolbar>
@@ -109,7 +107,7 @@ export const Layout = () => {
             }}
           >
             <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
+              <Icon.ChevronLeft />
             </IconButton>
           </Toolbar>
           <Divider />
@@ -117,7 +115,7 @@ export const Layout = () => {
             <Link to='/list-expenses'>
               <ListItem button>
                 <ListItemIcon>
-                  <EuroIcon />
+                  <Icon.Euro />
                 </ListItemIcon>
                 <ListItemText primary="List Expenses" />
               </ListItem>
@@ -125,7 +123,7 @@ export const Layout = () => {
             <Link to='/categories'>
               <ListItem button>
                 <ListItemIcon>
-                  <CategoryIcon />
+                  <Icon.Category />
                 </ListItemIcon>
                 <ListItemText primary="Categories" />
               </ListItem>
@@ -133,7 +131,7 @@ export const Layout = () => {
             <Link to='/profile'>
               <ListItem button>
                 <ListItemIcon>
-                  <CategoryIcon />
+                  <Icon.Person />
                 </ListItemIcon>
                 <ListItemText primary="Profile" />
               </ListItem>
@@ -141,7 +139,7 @@ export const Layout = () => {
             <Link to='/income'>
               <ListItem button>
                 <ListItemIcon>
-                  <CategoryIcon />
+                  <Icon.AccountBalance />
                 </ListItemIcon>
                 <ListItemText primary="Income" />
               </ListItem>
