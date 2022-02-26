@@ -37,7 +37,7 @@ export const Income = () => {
     {
       id: 'config',
       label: '',
-      render: ({row}) => {
+      render: () => {
         return <IconButton><SettingsApplications color="action" /></IconButton>
       },
     },

@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { Add } from '@mui/icons-material';
 import { Container, Fab, Modal, Grid, TextField, InputLabel, FormControl, MenuItem, Select, Typography, Box, Button } from '@mui/material';
+import PropTypes from 'prop-types';
 
 import { ModalBox } from '../../components/ModalBox';
 
@@ -43,7 +44,6 @@ export const CreateExpense = ({onCreated}) => {
 
   const saveExpense = async (input) => {
     try {
-      debugger;
       await createExpense({
         variables: { input },
       });
@@ -126,3 +126,8 @@ const ButtonsContainer = {
   gap: 2,
   justifyContent: 'flex-end',
 };
+
+
+CreateExpense.propTypes = {
+  onCreated: PropTypes.function,
+}

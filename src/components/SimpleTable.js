@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 
 const Rows = (columns, row) => {
   return columns.map((column) => {
@@ -67,4 +68,17 @@ const FinalRow = ({ finalRow, data }) => {
       </TableCell>
     </TableRow>
   )
+}
+
+FinalRow.propTypes = {
+  finalRow: PropTypes.obj,
+  data: PropTypes.array
+}
+
+SimpleTable.propTypes = {
+  finalRow: PropTypes.obj,
+  config: PropTypes.obj,
+  data: PropTypes.array,
+  columns: PropTypes.array,
+  title: PropTypes.string,
 }

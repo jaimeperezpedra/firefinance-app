@@ -1,5 +1,6 @@
 import React from 'react';
 import {  Box } from '@mui/material';
+import PropTypes from 'prop-types';
 
 const modalStyle = {
   position: 'absolute',
@@ -13,4 +14,10 @@ const modalStyle = {
   p: 3,
 };
 
-export const ModalBox = React.forwardRef((props, ref) => (<Box {...props} ref={ref} sx={modalStyle}>{props.children}</Box>))
+export const ModalBox = React.forwardRef((props, ref) => (<Box {...props} ref={ref} sx={modalStyle}>{props.children}</Box>));
+
+ModalBox.displayName = 'ModalBox';
+
+ModalBox.propTypes = {
+  children: PropTypes.node,
+}
