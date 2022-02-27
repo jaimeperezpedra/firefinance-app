@@ -1,7 +1,7 @@
 name: React CI/CD
 on:
   push: 
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
     types: [opened, reopened]
 
@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@1
+        uses: actions/setup-node@2
         with: 
           node-version: ${{ matrix.node-version }}
       - run: npm i
