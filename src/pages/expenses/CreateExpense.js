@@ -129,5 +129,5 @@ const ButtonsContainer = {
 
 
 CreateExpense.propTypes = {
-  onCreated: PropTypes.function,
+  onCreated: PropTypes.func,
 }
