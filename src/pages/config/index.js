@@ -1,1 +1,1 @@
-export { Categories } from './Categories';
+export { Config as Config } from './Config';

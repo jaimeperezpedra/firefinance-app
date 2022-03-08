@@ -4,6 +4,7 @@ import { CssBaseline, Drawer, Box, AppBar, Toolbar,
   List, ListItem,ListItemIcon, ListItemText , Typography, Divider, IconButton, Badge } from '@mui/material';
 import  * as Icon  from '@mui/icons-material/'
 import { Outlet, Link } from "react-router-dom";
+import PropTypes from 'prop-types';
 
 const drawerWidth = 240;
 
@@ -53,12 +54,37 @@ const MuiDrawer = styled(Drawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
+const listMenu = [
+  {
+    url: '/list-expenses',
+    icon: <Icon.Euro />,
+    title: 'Expenses'
+  },
+  {
+    url: '/config',
+    icon: <Icon.Settings />,
+    title: 'Config'
+  },
+  {
+    url: '/profile',
+    icon: <Icon.Person />,
+    title: 'Profile'
+  },
+  {
+    url: '/income',
+    icon: <Icon.AccountBalance />,
+    title: 'Income'
+  }
+]
+
 
 export const Layout = () => {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -112,38 +138,8 @@ export const Layout = () => {
           </Toolbar>
           <Divider />
           <List>
-            <Link to='/list-expenses'>
-              <ListItem button>
-                <ListItemIcon>
-                  <Icon.Euro />
-                </ListItemIcon>
-                <ListItemText primary="List Expenses" />
-              </ListItem>
-            </Link>
-            <Link to='/categories'>
-              <ListItem button>
-                <ListItemIcon>
-                  <Icon.Settings />
-                </ListItemIcon>
-                <ListItemText primary="Config" />
-              </ListItem>
-            </Link>
-            <Link to='/profile'>
-              <ListItem button>
-                <ListItemIcon>
-                  <Icon.Person />
-                </ListItemIcon>
-                <ListItemText primary="Profile" />
-              </ListItem>
-            </Link>
-            <Link to='/income'>
-              <ListItem button>
-                <ListItemIcon>
-                  <Icon.AccountBalance />
-                </ListItemIcon>
-                <ListItemText primary="Income" />
-              </ListItem>
-            </Link>
+            {listMenu.map((menu) => <ListLink key={menu.url} menu={menu} toggleDrawer={toggleDrawer} />
+            )}
           </List>
           <Divider />
           <List></List>
@@ -166,4 +162,23 @@ export const Layout = () => {
       </Box>
     </ThemeProvider>
   )
+}
+
+const ListLink = React.forwardRef((props, ref) => (
+  <Link key={ref} to={props.menu.url} onClick={props.toggleDrawer} >
+    <ListItem button>
+      <ListItemIcon>
+        {props.menu.icon}
+      </ListItemIcon>
+      <ListItemText primary={props.menu.title} />
+    </ListItem>
+  </Link>
+));
+
+ListLink.displayName = 'ListLink';
+
+
+ListLink.propTypes = {
+  menu: PropTypes.object,
+  toggleDrawer: PropTypes.func,
 }

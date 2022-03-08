@@ -11,7 +11,7 @@ import {
 } from '@apollo/client';
 
 let httpLink = 'http://localhost:4012/'
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'production') {
   httpLink = 'https://firefinance.vercel.app/server.js'
 }
 const link = createHttpLink({ uri: httpLink })
