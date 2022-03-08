@@ -11,7 +11,7 @@ import { CreateExpense } from './CreateExpense';
 
 
 export const GET_ALL_EXPENSES = gql`
-  query getExpenses($input: ExpenseFilter) {
+  query getExpenses($input: ExpenseFilter!) {
     expenses(input: $input) {
       category
       price
@@ -23,8 +23,8 @@ export const GET_ALL_EXPENSES = gql`
 `;
 
 export const DELETE_EXPENSE_BY_ID = gql`
-  mutation deleteExpense($input: ID!) {
-    deleteExpense(input: $input)
+  mutation deleteExpense($id: ID!) {
+    deleteExpense(id: $id)
   }
 `;
 
@@ -76,7 +76,7 @@ export const ListExpenses = () => {
 
   const deleteExpense = async () => {
     await deleteExpenseByID({
-      variables: { input: idToDelete },
+      variables: { id: idToDelete },
     });
     refetch();
     handleClose(false);
