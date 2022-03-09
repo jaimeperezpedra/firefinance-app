@@ -72,7 +72,7 @@ export const CreateExpense = ({onCreated}) => {
                   <TextField {...register('category')} label="Category" fullWidth variant="standard" />
                 </Grid>
                 <Grid item xs={12} sm={4}>
-                <TextField {...register('price')} type="number" label="Price" fullWidth variant="standard" />
+                <TextField {...register('price')} type="number" inputProps={{step: '0.01'}}   label="Price" fullWidth variant="standard" />
                 <p>{errors.price?.message}</p>
                 </Grid>
                 <Grid item xs={12} sm={4}>
