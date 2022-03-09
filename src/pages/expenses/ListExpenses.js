@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, IconButton, Modal, Button, Box, TextField } from '@mui/material';
+import { Container, IconButton, Modal, Button, Box, TextField, Typography } from '@mui/material';
 import DatePicker from '@mui/lab/DatePicker';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
@@ -108,11 +108,11 @@ export const ListExpenses = () => {
         open={open}
         onClose={() => handleClose(false)}
       >
-        {/* <div>hollo</div> */}
         <ModalBox>
-          <h3>
-            Are you sure you want to the delete the expense?
-          </h3>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Delete expense
+          </Typography>
+          <p>Are you sure you want to the delete the expense?</p>
           <Box sx={ButtonsContainer}>
             <Button  variant="contained" onClick={() => handleClose(false)} color="primary">
               Close
@@ -131,4 +131,5 @@ const ButtonsContainer = {
   display: 'flex',
   gap: 2,
   justifyContent: 'flex-end',
+  mt: 2
 };

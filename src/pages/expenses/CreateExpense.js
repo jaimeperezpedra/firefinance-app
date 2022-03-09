@@ -64,10 +64,10 @@ export const CreateExpense = ({onCreated}) => {
         <ModalBox>
           <Container>
             <form onSubmit={handleSubmit(saveExpense)}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
+              <Typography id="modal-modal-title" variant="h5" component="h2">
                 Add an expense
               </Typography>
-              <Grid container spacing={1} sx={{ mt: 2, mb: 3 }}>
+              <Grid container spacing={1} sx={{ mt: 1, mb: 1 }}>
                 <Grid item xs={12} sm={4}>
                   <TextField {...register('category')} label="Category" fullWidth variant="standard" />
                 </Grid>
@@ -99,7 +99,7 @@ export const CreateExpense = ({onCreated}) => {
                 <Grid item xs={12}>
                 <TextField {...register('description')} label="Description" fullWidth variant="standard" />
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={12} sx={{mt:2}}>
                   <Box sx={ButtonsContainer}>
                     <Button  variant="contained" onClick={() => handleClose(false)} color="primary">
                       Close
