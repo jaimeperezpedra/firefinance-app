@@ -9,7 +9,6 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { SimpleTable, ModalBox } from '../../components'
 import { CreateExpense } from './CreateExpense';
 
-
 export const GET_ALL_EXPENSES = gql`
   query getExpenses($input: ExpenseFilter!) {
     expenses(input: $input) {
@@ -44,7 +43,6 @@ export const ListExpenses = () => {
   const [deleteExpenseByID] = useMutation(DELETE_EXPENSE_BY_ID);
   const [open, handleClose] = React.useState(false);
   const [idToDelete, setIdToDelete] = React.useState('');
-
   const columns = [
     {
       id: 'price',
@@ -99,9 +97,10 @@ export const ListExpenses = () => {
           renderInput={(params) => <TextField {...params} helperText={null} />}
         />
       </LocalizationProvider>
-      {loading && 'Loading...'}
-      {error && 'Error...'}
-      {data && <SimpleTable data={data.expenses} columns={columns} config={{dense: true}} />}
+      {/* {loading && 'Loading...'} */}
+      {error ? 'Error...' :
+        <SimpleTable title='List expenses' loading={loading} data={data?.expenses} columns={columns} />
+      }
 
       <CreateExpense onCreated={() => refetch()} />
       <Modal

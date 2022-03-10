@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Typography } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, Typography, Skeleton } from '@mui/material';
 import PropTypes from 'prop-types';
 
 const Rows = (columns, row) => {
@@ -8,46 +8,59 @@ const Rows = (columns, row) => {
   });
 };
 
-export const SimpleTable = ({ data, columns, config, finalRow, title }) => {
-  const getTypeTable = () => {
-    if (config?.dense) {
-      return 'a dense table'
-    } else {
-      return 'simple table'
-    }
-  }
-
+export const SimpleTable = ({ data, columns, finalRow, title, loading }) => {
   return (
     <TableContainer component={Paper} >
       {title && <Box sx={{p:2}}>
         <Typography
-          component="h1"
-          variant="h6"
-          color="inherit"
-          noWrap
-          sx={{ flexGrow: 1 }}
+        component="h1"
+        variant="h6"
+        color="inherit"
+        noWrap
+        sx={{ flexGrow: 1 }}
         >
           {title}
         </Typography>
       </Box>}
-      <Table sx={{ minWidth: 650 }} aria-label={getTypeTable()}>
+      <Table sx={{ minWidth: 650 }} loading={true}>
         <TableHead>
           <TableRow>
-            {columns.map((column) => (
-              <TableCell key={column.id} align={column.align}>{column.label}</TableCell>
-            ))}
+            {loading ? 
+            <TableCell>
+              <Skeleton animation="wave" height={64} />
+            </TableCell>
+            : 
+            columns.map((column) => (<TableCell key={column.id} align={column.align}>{column.label}</TableCell>))
+            }
+            
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.length === 0 && 'No results found'}
-          {data.map((row) => (
+          { loading ? 
+            <>
+              <TableRow>
+                <TableCell>
+                  <Skeleton animation="wave" height={32} />
+                </TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>
+                  <Skeleton animation="wave" height={32} />
+                </TableCell>
+              </TableRow>
+            </>
+          :
+          data.length === 0 ? 'No results found':
+          data.map((row) => (
             <TableRow
               key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               {Rows(columns, row)}
             </TableRow>
-          ))}
+          ))
+          }
+
           { finalRow && <FinalRow finalRow={finalRow} data={data} /> }
         </TableBody>
       </Table>
@@ -77,8 +90,8 @@ FinalRow.propTypes = {
 
 SimpleTable.propTypes = {
   finalRow: PropTypes.obj,
-  config: PropTypes.obj,
   data: PropTypes.array,
   columns: PropTypes.array,
   title: PropTypes.string,
+  loading: PropTypes.bool.isRequired
 }
