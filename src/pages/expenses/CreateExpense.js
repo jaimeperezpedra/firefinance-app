@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { Add } from '@mui/icons-material';
 import { Container, Fab, Modal, Grid, TextField, InputLabel, FormControl, MenuItem, Select, Typography, Box, Button } from '@mui/material';
 import PropTypes from 'prop-types';
+import { toast } from 'react-toastify';
 
 import { ModalBox } from '../../components/ModalBox';
 
@@ -49,7 +50,9 @@ export const CreateExpense = ({onCreated}) => {
       });
       onCreated();
       handleClose(false);
+      toast.success('Expense created successfully')
     } catch (error) {
+      toast.error('Error creating the expense')
       // Error handling
       return `Error: ${error}`;
     }
