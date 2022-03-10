@@ -5,6 +5,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { toast } from 'react-toastify';
 
 import { SimpleTable, ModalBox } from '../../components'
 import { CreateExpense } from './CreateExpense';
@@ -75,11 +76,16 @@ export const ListExpenses = () => {
   ];
 
   const deleteExpense = async () => {
-    await deleteExpenseByID({
-      variables: { id: idToDelete },
-    });
-    refetch();
-    handleClose(false);
+    try {
+      await deleteExpenseByID({
+        variables: { id: idToDelete },
+      });
+      toast.success('The expense was delete successfully');
+      refetch();
+      handleClose(false);
+    } catch (error) {
+      toast.error('There was an error, try again!');
+    }
   }
   const openDeleteModal = ({id}) => {
     setIdToDelete(id);
