@@ -33,6 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && rm -rf ./cordova2/www/* && mv build/* ./cordova2/www",
+    "android": "cd cordova2/ && cordova run android && cd ..",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint ./src"

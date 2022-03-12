@@ -56,7 +56,7 @@ const mdTheme = createTheme();
 
 const listMenu = [
   {
-    url: '/list-expenses',
+    url: '/',
     icon: <Icon.Euro />,
     title: 'Expenses'
   },
@@ -79,9 +79,9 @@ const listMenu = [
 
 
 export const Layout = () => {
-  const [open, setOpen] = React.useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
+  const [open, setOpen] = React.useState(false);
+  const toggleDrawer = (value = !open) => {
+    setOpen(value);
   };
 
 
@@ -132,17 +132,16 @@ export const Layout = () => {
               px: [1],
             }}
           >
-            <IconButton onClick={toggleDrawer}>
+            <IconButton onClick={() => toggleDrawer(false)}>
               <Icon.ChevronLeft />
             </IconButton>
           </Toolbar>
           <Divider />
           <List>
-            {listMenu.map((menu) => <ListLink key={menu.url} menu={menu} toggleDrawer={toggleDrawer} />
+            {listMenu.map((menu) => <ListLink key={menu.url} menu={menu} toggleDrawer={() => toggleDrawer(false)} />
             )}
           </List>
           <Divider />
-          <List></List>
         </MuiDrawer>
         <Box
           component="main"
