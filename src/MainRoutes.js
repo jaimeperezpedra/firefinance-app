@@ -18,8 +18,7 @@ export const MainRoutes = () =>
     <Route
       path="/"
       element={<RequireAuth><Layout /></RequireAuth>}>
-      <Route path="/create-expense" element={<Pages.CreateExpense />} />
-      <Route path="/list-expenses" element={<Pages.ListExpenses />} />
+      <Route path="/" element={<Pages.ListExpenses />} />
       <Route path="/config" element={<Pages.Config />} />
       <Route path="/profile" element={<Pages.Profile />} />
       <Route path="/income" element={<Pages.Income />} />
