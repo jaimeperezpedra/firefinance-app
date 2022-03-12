@@ -33,7 +33,7 @@ export const CREATE_EXPENSE = gql`
 
 export const CreateExpense = ({onCreated}) => {
   const [open, handleClose] = React.useState(false);
-  const { register, handleSubmit, control, formState: { errors } } = useForm(
+  const { register, handleSubmit, control, reset, formState: { errors } } = useForm(
     {
       defaultValues: {
         currency: 'euro',
@@ -56,6 +56,11 @@ export const CreateExpense = ({onCreated}) => {
       // Error handling
       return `Error: ${error}`;
     }
+  }
+
+  const openModal =() => {
+    handleClose(true);
+    reset();
   }
 
   return ( 
@@ -117,7 +122,7 @@ export const CreateExpense = ({onCreated}) => {
           </Container> 
         </ModalBox>
       </Modal>
-      <Fab color="primary" aria-label="add" sx={fabStyle} onClick={() => handleClose(true)}>
+      <Fab color="primary" aria-label="add" sx={fabStyle} onClick={openModal}>
         <Add />
       </Fab>
     </>
