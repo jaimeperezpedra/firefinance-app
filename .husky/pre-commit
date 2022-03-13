@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npx react-scripts test --watchAll=false && ./node_modules/.bin/eslint ./src
+npx react-scripts test --watchAll=false
