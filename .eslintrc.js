@@ -1,4 +1,10 @@
 module.exports = {
+    "settings": {
+        "react": {
+            "pragma": "React",
+            "version": "17.0.2"
+        }
+    },
     "env": {
         "browser": true,
         "es2021": true,
