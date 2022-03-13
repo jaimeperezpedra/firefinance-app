@@ -36,7 +36,8 @@
     "android": "cd cordova2/ && cordova run android && cd ..",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "./node_modules/.bin/eslint ./src"
+    "lint": "./node_modules/.bin/eslint ./src",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -59,6 +60,7 @@
   "devDependencies": {
     "eslint": "8.10.0",
     "eslint-plugin-react": "7.29.2",
+    "husky": "7.0.4",
     "jest-watch-typeahead": "0.6.5",
     "mockdate": "3.0.5"
   }
