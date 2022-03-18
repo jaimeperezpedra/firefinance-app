@@ -61,7 +61,7 @@ export const SimpleTable = ({ data, columns, finalRow, title, loading }) => {
           ))
           }
 
-          { finalRow && <FinalRow finalRow={finalRow} data={data} /> }
+          { !loading && finalRow && <FinalRow finalRow={finalRow} data={data} /> }
         </TableBody>
       </Table>
     </TableContainer>
@@ -70,14 +70,14 @@ export const SimpleTable = ({ data, columns, finalRow, title, loading }) => {
 
 const FinalRow = ({ finalRow, data }) => {
   let sum = 0;
-  data.map(row => sum = sum + row[finalRow.sum]);
+  data?.map(row => sum = sum + row[finalRow.sum]);
   return (
     <TableRow>
       <TableCell key='final-row-title'>
         {finalRow.title}
       </TableCell>
       <TableCell key='final-row-sum'>
-        {sum}
+        {sum.toFixed(2)} €
       </TableCell>
     </TableRow>
   )

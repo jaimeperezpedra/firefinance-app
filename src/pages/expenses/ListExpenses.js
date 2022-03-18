@@ -89,6 +89,10 @@ export const ListExpenses = () => {
     setIdToDelete(id);
     handleClose(true);
   }
+  const finalRow = {
+    title: 'Total',
+    sum: 'price',
+  }
 
   return (
     <Container sx={{ mt: 4, mb: 4 }}>
@@ -105,7 +109,7 @@ export const ListExpenses = () => {
       </LocalizationProvider>
       {/* {loading && 'Loading...'} */}
       {error ? 'Error...' :
-        <SimpleTable title='List expenses' loading={loading} data={data?.expenses} columns={columns} />
+        <SimpleTable title='List expenses' loading={loading} data={data?.expenses} columns={columns} finalRow={finalRow} />
       }
 
       <CreateExpense onCreated={() => refetch()} />
