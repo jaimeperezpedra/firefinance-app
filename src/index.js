@@ -3,31 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
-import {
-  ApolloProvider,
-  ApolloClient,
-  createHttpLink,
-  InMemoryCache
-} from '@apollo/client';
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistStore } from 'redux-persist'
 
-let httpLink = 'http://localhost:4012/'
-if (process.env.NODE_ENV === 'production') {
-  httpLink = 'https://firefinance.vercel.app/server.js'
-}
-const link = createHttpLink({ uri: httpLink })
+import { ApolloWrapper } from './ApolloWrapper'
+import store from './store/store'
 
-const client = new ApolloClient({
-  link,
-  cache: new InMemoryCache()
-});
+let persistor = persistStore(store);
 
 const startApp = () => {
   ReactDOM.render(
-    <ApolloProvider client={client}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </ApolloProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <ApolloWrapper>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </ApolloWrapper>
+      </PersistGate>
+    </Provider>
     ,
     document.getElementById('root')
   );

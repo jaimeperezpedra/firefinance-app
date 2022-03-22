@@ -1,58 +1,35 @@
 import * as React from 'react';
-import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Paper, Box, Grid, Typography } from '@mui/material';
+import { Avatar, Button, CssBaseline, Paper, Box, Grid, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { gql, useMutation } from '@apollo/client';
-import { useForm } from 'react-hook-form';
-import * as yup from "yup";
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useDispatch } from 'react-redux'
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { setCredentials } from '../../store/credentials';
 
-import { setCredentials } from '../../store/credentials'
-
-export const LOGIN = gql`
-  mutation loginUser($input: UserCredentials!) {
-    loginUser(input: $input) {
-      idToken
-      email
-      refreshToken
-      localId
-      expiresIn
-      registered
-    }
-  }
-`;
-
-const schema = yup.object().shape({
-  email: yup.string().email('Must be a valid email').max(255).required('Email is required'),
-  password: yup.string().min(6, 'Password must be at least 6 characters'),
-}).required();
+import '../../config/firebase'
 
 const theme = createTheme();
 
 export const Login = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [loginUser] = useMutation(LOGIN);
-  const { register, handleSubmit, formState: {errors} } = useForm(
-    {
-      resolver: yupResolver(schema),
-    }
-  );
+  const dispatch = useDispatch();
 
-  const loginCall = async (input) => {
-    const { data, errors } = await loginUser({
-      variables: {
-        input
-      }
-    });
-    if (!errors && !!data.loginUser.localId) {
-      await dispatch(setCredentials({
-        ...data.loginUser,
-      }));
-      navigate('/');
-    }
+  const loginCall = async () => {
+    const googleProvider = new GoogleAuthProvider();
+    const auth = getAuth();
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        dispatch(setCredentials({
+          ...credential,
+          uid: result.user.uid,
+          accessToken: result.user.accessToken
+        }));
+        navigate('/');
+      }).catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -89,40 +66,14 @@ export const Login = () => {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit(loginCall)} sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                {...register('email')}
-                label="Email Address"
-                autoComplete="email"
-                autoFocus
-                error={!!errors.email}
-                helperText={errors.email?.message}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                {...register('password')}
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-                error={!!errors.password}
-                helperText={errors.password?.message}
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+            <Box sx={{ mt: 1 }}>
               <Button
-                type="submit"
+                onClick={loginCall}
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
-                Sign In
+                Sign In with google
               </Button>
             </Box>
           </Box>

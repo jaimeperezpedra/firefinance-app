@@ -5,11 +5,11 @@ export const credentialsSlice = createSlice({
   initialState: {
     values: {
       idToken: '',
-      email: '',
-      refreshToken: '',
-      localId: '',
-      expiresIn: '',
-      registered: false
+      uid: '',
+      accessToken: '',
+      signInMethod: '',
+      providerId: '',
+      pendingToken: '',
     }
   },
   reducers: {
